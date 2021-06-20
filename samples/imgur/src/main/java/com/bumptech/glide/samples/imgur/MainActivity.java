@@ -2,6 +2,7 @@ package com.bumptech.glide.samples.imgur;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ import rx.schedulers.Schedulers;
 
 /** Displays images and GIFs from Imgur in a scrollable list of cards. */
 public final class MainActivity extends AppCompatActivity {
-
+  public static final String TAG = "MainActivity";
   @Inject
   @Named("hotViralImages")
   Observable<List<Image>> fetchImagesObservable;
@@ -54,7 +55,9 @@ public final class MainActivity extends AppCompatActivity {
               public void onCompleted() {}
 
               @Override
-              public void onError(Throwable e) {}
+              public void onError(Throwable e) {
+                Log.e(TAG, "onError:" + e.getLocalizedMessage());
+              }
 
               @Override
               public void onNext(List<Image> images) {
